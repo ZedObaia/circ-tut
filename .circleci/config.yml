@@ -8,16 +8,16 @@ jobs:
     steps:
       - run:
           name: store data
-          command: echo "Hello World" > /output/hello_world.txt
+          command: echo "Hello World" > /hello_world.txt
       - persist_to_workspace:
-          root: /output
+          root: /
           paths:
             - hello_world.txt
   print_output_file:
     docker:
       - image: alpine:latest
     steps:
-      - run: cat /output/hello_world.txt
+      - run: cat /hello_world.txt
 
 workflows:
   # Name the workflow "welcome"
