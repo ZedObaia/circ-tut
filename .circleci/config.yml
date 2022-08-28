@@ -17,7 +17,9 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - run: cat /hello_world.txt
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: cat /tmp/workspace/hello_world.txt
 
 workflows:
   # Name the workflow "welcome"
