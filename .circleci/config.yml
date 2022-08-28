@@ -3,8 +3,8 @@ version: 2.1
 
 commands:
   print_pipeline_id:
-    step:
-      run: echo $CIRCLE_PIPELINE_ID
+    steps:
+      - run: echo $CIRCLE_PIPELINE_ID
 
 
 jobs:
