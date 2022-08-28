@@ -2,17 +2,29 @@
 version: 2.1
 
 jobs:
-  print_env:
+  save_hello_world_output:
     docker:
-      - image: cimg/base:2020.01
+      - image: alpine:latest
     steps:
       - run:
-          name: echo
-          command: echo $USERNAME
+          name: store data
+          command: echo "Hello World" > /output/hello_world.txt
+      - persist_to_workspace:
+          root: /output
+          paths:
+            - hello_world.txt
+  print_output_file:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: cat /output/hello_world.txt
 
 workflows:
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
     jobs:
-      - print_env
+      - save_hello_world_output
+      - print_output_file
+        requires:
+          - save_hello_world_output
