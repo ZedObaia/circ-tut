@@ -6,9 +6,11 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - run return 1
-      - run echo "Job failed":
-        when: on_fail
+      - run exit 1
+      - run:
+          name: "fail_on_purpose"
+          command: "echo 'fail_on_purpose'"
+          when: on_fail
 
 workflows:
   # Name the workflow "welcome"
